@@ -16,14 +16,18 @@ function ncsu_utility_bar_scripts(){
 	wp_enqueue_style('ncsu_ub_styles','css/main.css');
 
 	$options = get_option('ncsu_ub_options');
-	$google_code = $options['ub_google_code']!=null?'googleCustomSearchCode='.$options['ub_google_code']:'';
-	$search_placeholder = $options['ub_search_placeholder']!=null?'&placeholder='.$options['ub_search_placeholder']:'';
-	$maxWidth = $options['ub_max_width']!=null?'&maxWidth='.$options['ub_max_width']:'';
-	$color = $options['ub_bar_color']!=null?'&color='.$options['ub_bar_color']:'';
-	$brick = $options['ub_tf_brick']!=null?'&showBrick='.$options['ub_tf_brick']:'';
+
+	//map WP option names to CDN recognized GET values
+	$query_string = array(
+			'googleCustomSearchCode' => $options['ub_google_code'],
+			'placeholder' => $options['ub_search_placeholder'],
+			'maxWidth' => $options['ub_max_width'],
+			'color' => $options['ub_bar_color'],
+			'showBrick' => $options['ub_tf_brick']
+			);
 
 	wp_enqueue_script('ncstate-utility-bar',
-	'https://cdn.ncsu.edu/brand-assets/utility-bar/ub.php?'.$google_code.$search_placeholder.$maxWidth.$color.$brick,false,false,true);
+	'https://cdn.ncsu.edu/brand-assets/utility-bar/ub.php?'.http_build_query($query_string),false,false,true);
 }
 
 add_action('admin_menu','ncsu_utility_bar_menu');
@@ -126,33 +130,30 @@ function ncsu_ub_display_section(){
 	function ncsu_ub_options_validate($input) {
 		//validate google custom code
 		$newinput['ub_google_code'] = trim($input['ub_google_code']);
-		if(!preg_match('/^[a-z0-9\:]{3,50}$/i', $newinput['ub_google_code'])) {
-			$newinput['ub_google_code'] = '';
+		if(empty($newinput['ub_google_code']) || !preg_match('/^[a-z0-9\:]{3,50}$/i', $newinput['ub_google_code']) ){
+			$newinput['ub_google_code'] = null;
 		}
 		//validate search placeholder
 		$newinput['ub_search_placeholder'] = trim($input['ub_search_placeholder']);
-		//strip white space and replace with +'s
-		$newinput['ub_search_placeholder'] = preg_replace('/[\s_]/', '+', $newinput['ub_search_placeholder']);
-		if(!preg_match('/^[a-z0-9_\s+-]/', $newinput['ub_search_placeholder'])) {
-			$newinput['ub_search_placeholder'] = '';
+		if(empty($newinput['ub_search_placeholder']) || !preg_match('/^[a-z0-9_\s+-]/', $newinput['ub_search_placeholder'])) {
+			$newinput['ub_search_placeholder'] = null;
 		}
 		//validate width
 		$newinput['ub_max_width'] = trim($input['ub_max_width']);
-		if(!preg_match('/^[0-9]{2,5}$/i', $newinput['ub_max_width'])) {
-			$newinput['ub_max_width'] = '';
+		if(empty($newinput['ub_max_width']) || !preg_match('/^[0-9]{2,5}$/i', $newinput['ub_max_width'])) {
+			$newinput['ub_max_width'] = null;
 		}
 		//validate color
-		$newinput['ub_bar_color']=$input['ub_bar_color'];
-		if(!$input['ub_bar_color']=='gray' || !$input['ub_bar_color']=='red' || !$input['ub_bar_color']=='black') {
-			$newinput['ub_bar_color'] = '';
+		$newinput['ub_bar_color'] = $input['ub_bar_color'];
+		if(!$newinput['ub_bar_color'] == 'gray' || !$newinput['ub_bar_color'] == 'red' || !$newinput['ub_bar_color'] == 'black') {
+			$newinput['ub_bar_color'] = null;
 		}
 		//validate showBrick
-		$newinput['ub_tf_brick']=$input['ub_tf_brick'];
-		if($input['ub_tf_brick']=='1') {
+		if(!empty($input['ub_tf_brick']) && $input['ub_tf_brick'] == 1) {
 			$newinput['ub_tf_brick'] = 1;
 		}
 		else{
-			$newinput['ub_tf_brick'] = 0;
+			$newinput['ub_tf_brick'] = null;
 		}
 
 		return $newinput;

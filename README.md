@@ -21,3 +21,6 @@ There are a few customizable options available under Settings -> NCSU Utility Ba
 * Bar Color: Alternate color options for the bar's color. Gray is the most commonly used.
 
 * Use NCSU Brick?: Choose whether to use the NCSU red brick, as seen on the [central NCSU](https://ncsu.edu) page, or a simple link for the home button. 
+
+### WordPress Multisite Compatibility
+This plugin is compatible with WordPress multisite installs. Network activation will enable the utility bar on all network sites with default values, with customization available on a per-site basis. No additional configuration options will appear in the Network Admin dashboard.
