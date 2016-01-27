@@ -1,4 +1,4 @@
-# ncstate-utility-bar-plugin
+# NCState Utility Bar WordPress Plugin
 A WordPress plugin for inserting the official NC State Utility Bar at the top of every page
 
 ### Usage policies:

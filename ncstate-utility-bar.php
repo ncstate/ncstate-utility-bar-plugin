@@ -13,8 +13,6 @@ add_action('wp_enqueue_scripts','ncsu_utility_bar_scripts');
 
 function ncsu_utility_bar_scripts(){
 
-	wp_enqueue_style('ncsu_ub_styles','css/main.css');
-
 	$options = get_option('ncsu_ub_options');
 
 	//map WP option names to CDN recognized GET values
@@ -81,81 +79,81 @@ function ncsu_ub_display_section(){
 	<p><strong>All fields are optional.</strong></p>
 <?php
 }
-	function ncsu_ub_display_google_code(){
-		$options = get_option('ncsu_ub_options');
+function ncsu_ub_display_google_code(){
+	$options = get_option('ncsu_ub_options');
 
-		echo "<input type='text' size=40 name='ncsu_ub_options[ub_google_code]' value='{$options['ub_google_code']}' />";?>
+	echo "<input type='text' size=40 name='ncsu_ub_options[ub_google_code]' value='{$options['ub_google_code']}' />";?>
 
-		<p><em>The search box within the utility bar can search both your own site and the entire ncsu.edu domain. To search your own site you must create a
-			search engine through <a href='https://cse.google.com/cse/' target="_blank">Google Custom Search.</a> If this isn't set, the utility bar will only perform a global ncsu.edu search.</em></p>
-		<?php
-	}
-	function ncsu_ub_display_placeholder(){
-		$options = get_option('ncsu_ub_options');
-			
-		echo "<input type='text' name='ncsu_ub_options[ub_search_placeholder]' value='". preg_replace('/(\+)/', ' ', $options['ub_search_placeholder']) ."' />";?>
-		<p><em>Customization of the placeholder text in the search bar.</em></p>
-		<?php
-	}
-	function ncsu_ub_display_width(){
-		$options = get_option('ncsu_ub_options');
-		
-		echo "<input type='text' name='ncsu_ub_options[ub_max_width]' value='{$options['ub_max_width']}' />";?>
-		<p><em>The utility bar is responsive. The width value should be set to your site's maximum breakpoint to enable a
-			fluid container width. If no width is set, the bar will align its contents to the default
-			<a href='https://brand.ncsu.edu/bootstrap/css/#grid-options' target="_blank">Bootstrap container sizes</a>
-			and breakpoints.
-		</em></p>
-		<?php
-	}
-	function ncsu_ub_display_color(){
-		$options = get_option('ncsu_ub_options');
-
-		echo "<select id='ncsu_utility_bar_color' name='ncsu_ub_options[ub_bar_color]'>"; ?>
-			<option value="gray" <?php echo ($options['ub_bar_color']=="gray")?"selected":""; ?>>Gray</option>
-			<option value="red" <?php echo ($options['ub_bar_color']=="red")?"selected":""; ?>>Red</option>
-			<option value="black" <?php echo ($options['ub_bar_color']=="black")?"selected":""; ?>>Black</option>
-		</select>
-		<p><em>The color of the utility bar - Gray, Black, or Red</em></p>
+	<p><em>The search box within the utility bar can search both your own site and the entire ncsu.edu domain. To search your own site you must create a
+		search engine through <a href='https://cse.google.com/cse/' target="_blank">Google Custom Search.</a> If this isn't set, the utility bar will only perform a global ncsu.edu search.</em></p>
 	<?php
+}
+function ncsu_ub_display_placeholder(){
+	$options = get_option('ncsu_ub_options');
+		
+	echo "<input type='text' name='ncsu_ub_options[ub_search_placeholder]' value='". preg_replace('/(\+)/', ' ', $options['ub_search_placeholder']) ."' />";?>
+	<p><em>Customization of the placeholder text in the search bar.</em></p>
+	<?php
+}
+function ncsu_ub_display_width(){
+	$options = get_option('ncsu_ub_options');
+	
+	echo "<input type='text' name='ncsu_ub_options[ub_max_width]' value='{$options['ub_max_width']}' />";?>
+	<p><em>The utility bar is responsive. The width value should be set to your site's maximum breakpoint to enable a
+		fluid container width. If no width is set, the bar will align its contents to the default
+		<a href='https://brand.ncsu.edu/bootstrap/css/#grid-options' target="_blank">Bootstrap container sizes</a>
+		and breakpoints.
+	</em></p>
+	<?php
+}
+function ncsu_ub_display_color(){
+	$options = get_option('ncsu_ub_options');
+
+	echo "<select id='ncsu_utility_bar_color' name='ncsu_ub_options[ub_bar_color]'>"; ?>
+		<option value="gray" <?php echo ($options['ub_bar_color']=="gray")?"selected":""; ?>>Gray</option>
+		<option value="red" <?php echo ($options['ub_bar_color']=="red")?"selected":""; ?>>Red</option>
+		<option value="black" <?php echo ($options['ub_bar_color']=="black")?"selected":""; ?>>Black</option>
+	</select>
+	<p><em>The color of the utility bar - Gray, Black, or Red</em></p>
+<?php
+}
+
+function ncsu_ub_display_brick(){
+	$options = get_option('ncsu_ub_options');
+	$isChecked = $options['ub_tf_brick']==1?"checked='checked'":"";
+	echo "<input type='checkbox' value='1' id='ncsu_utility_bar_brick' name='ncsu_ub_options[ub_tf_brick]' {$isChecked} />";
+}
+
+
+function ncsu_ub_options_validate($input) {
+	//validate google custom code
+	$newinput['ub_google_code'] = trim($input['ub_google_code']);
+	if(empty($newinput['ub_google_code']) || !preg_match('/^[a-z0-9\:]{3,50}$/i', $newinput['ub_google_code']) ){
+		$newinput['ub_google_code'] = null;
+	}
+	//validate search placeholder
+	$newinput['ub_search_placeholder'] = trim($input['ub_search_placeholder']);
+	if(empty($newinput['ub_search_placeholder']) || !preg_match('/^[a-z0-9_\s+-]/', $newinput['ub_search_placeholder'])) {
+		$newinput['ub_search_placeholder'] = null;
+	}
+	//validate width
+	$newinput['ub_max_width'] = trim($input['ub_max_width']);
+	if(empty($newinput['ub_max_width']) || !preg_match('/^[0-9]{2,5}$/i', $newinput['ub_max_width'])) {
+		$newinput['ub_max_width'] = null;
+	}
+	//validate color
+	$newinput['ub_bar_color'] = $input['ub_bar_color'];
+	if(!$newinput['ub_bar_color'] == 'gray' || !$newinput['ub_bar_color'] == 'red' || !$newinput['ub_bar_color'] == 'black') {
+		$newinput['ub_bar_color'] = null;
+	}
+	//validate showBrick
+	if(!empty($input['ub_tf_brick']) && $input['ub_tf_brick'] == 1) {
+		$newinput['ub_tf_brick'] = 1;
+	}
+	else{
+		$newinput['ub_tf_brick'] = null;
 	}
 
-	function ncsu_ub_display_brick(){
-		$options = get_option('ncsu_ub_options');
-		$isChecked = $options['ub_tf_brick']==1?"checked='checked'":"";
-		echo "<input type='checkbox' value='1' id='ncsu_utility_bar_brick' name='ncsu_ub_options[ub_tf_brick]' {$isChecked} />";
-	}
-
-
-	function ncsu_ub_options_validate($input) {
-		//validate google custom code
-		$newinput['ub_google_code'] = trim($input['ub_google_code']);
-		if(empty($newinput['ub_google_code']) || !preg_match('/^[a-z0-9\:]{3,50}$/i', $newinput['ub_google_code']) ){
-			$newinput['ub_google_code'] = null;
-		}
-		//validate search placeholder
-		$newinput['ub_search_placeholder'] = trim($input['ub_search_placeholder']);
-		if(empty($newinput['ub_search_placeholder']) || !preg_match('/^[a-z0-9_\s+-]/', $newinput['ub_search_placeholder'])) {
-			$newinput['ub_search_placeholder'] = null;
-		}
-		//validate width
-		$newinput['ub_max_width'] = trim($input['ub_max_width']);
-		if(empty($newinput['ub_max_width']) || !preg_match('/^[0-9]{2,5}$/i', $newinput['ub_max_width'])) {
-			$newinput['ub_max_width'] = null;
-		}
-		//validate color
-		$newinput['ub_bar_color'] = $input['ub_bar_color'];
-		if(!$newinput['ub_bar_color'] == 'gray' || !$newinput['ub_bar_color'] == 'red' || !$newinput['ub_bar_color'] == 'black') {
-			$newinput['ub_bar_color'] = null;
-		}
-		//validate showBrick
-		if(!empty($input['ub_tf_brick']) && $input['ub_tf_brick'] == 1) {
-			$newinput['ub_tf_brick'] = 1;
-		}
-		else{
-			$newinput['ub_tf_brick'] = null;
-		}
-
-		return $newinput;
-	}
-	?>
+	return $newinput;
+}
+?>
