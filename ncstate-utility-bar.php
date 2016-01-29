@@ -2,9 +2,9 @@
 /**
 * Plugin Name: NC State Utility Bar
 * Plugin URI: https://brand.ncsu.edu
-* Description: Inserts the NCSU Brand Utility Bar at the top of every page
+* Description: Inserts the NC State Brand Utility Bar at the top of every page
 * Version: 0.1
-* Author: NC State
+* Author: NC State University Communications
 */
 
 defined( 'ABSPATH' ) or die();
@@ -31,7 +31,7 @@ function ncsu_utility_bar_scripts(){
 add_action('admin_menu','ncsu_utility_bar_menu');
 
 function ncsu_utility_bar_menu(){
-	add_options_page('NCSU Utility Bar Options', 'NCState Utility Bar', 'manage_options', 'ncsu-utility-bar','ncsu_ub_options_page');
+	add_options_page('NC State Utility Bar Options', 'NC State Utility Bar', 'manage_options', 'ncsu-utility-bar','ncsu_ub_options_page');
 }
 
 function ncsu_ub_options_page(){
@@ -39,7 +39,7 @@ function ncsu_ub_options_page(){
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}?>
 	<div class="wrap">
-		<h2>NCSU Brand Utility Bar</h2>
+		<h2>NC State Brand Utility Bar</h2>
 		<form method="post" action="options.php">
 			
 			<?php settings_fields('ncsu_ub_options');?>
@@ -59,7 +59,7 @@ function ncsu_utility_bar_admin_init(){
 	add_settings_field('ub_search_placeholder','Search Placeholder','ncsu_ub_display_placeholder','ncsu_ub_settings','ncsu_ub_main_section');
 	add_settings_field('ub_max_width','Max Width','ncsu_ub_display_width','ncsu_ub_settings','ncsu_ub_main_section');
 	add_settings_field('ub_bar_color','Bar Color', 'ncsu_ub_display_color','ncsu_ub_settings','ncsu_ub_main_section');
-	add_settings_field('ub_tf_brick','Use NCState Brick?', 'ncsu_ub_display_brick','ncsu_ub_settings','ncsu_ub_main_section');
+	add_settings_field('ub_tf_brick','Use NC State Brick?', 'ncsu_ub_display_brick','ncsu_ub_settings','ncsu_ub_main_section');
 
 }
 function ncsu_ub_display_section(){
