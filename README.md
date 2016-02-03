@@ -10,7 +10,7 @@ For certain entities operating under unique circumstances, the utility bar might
 Simply activate the plugin - the official NCSU utility bar should show up without any additional customization needed.
 
 ### Customizable Options:
-There are a few customizable options available under Settings -> NCSU Utility Bar from the WordPress admin dashboard.
+There are a few customizable options available under Settings -> NC State Utility Bar from the WordPress admin dashboard.
 
 * Google Custom Search Code: By default, the search bar will only search ncsu.edu. To search your own site, you must first create a search engine through [Google Custom Search](https://cse.google.com/cse/), then enter your custom search code here.
 
@@ -20,7 +20,7 @@ There are a few customizable options available under Settings -> NCSU Utility Ba
 
 * Bar Color: Alternate color options for the bar's color. Gray is the most commonly used.
 
-* Use NCSU Brick?: Choose whether to use the NCSU red brick, as seen on the [central NCSU](https://ncsu.edu) page, or a simple link for the home button. 
+* Use NC State Brick?: Choose whether to use the NCSU red brick, as seen on the [central NCSU](https://ncsu.edu) page, or a simple link for the home button. 
 
 ### WordPress Multisite Compatibility
 This plugin is compatible with WordPress multisite installs. Network activation will enable the utility bar on all network sites with default values, with customization available on a per-site basis. No additional configuration options will appear in the Network Admin dashboard.
