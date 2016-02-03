@@ -1,4 +1,4 @@
-# NCState Utility Bar WordPress Plugin
+# NC State Utility Bar WordPress Plugin
 A WordPress plugin for inserting the official NC State Utility Bar at the top of every page
 
 ### Usage policies:
@@ -7,7 +7,7 @@ The NC State brand utility bar offers a simple way to connect our thousands of w
 For certain entities operating under unique circumstances, the utility bar might not be required. Exceptions will be handled on a case-by-case basis. Web Communications will provide support for the utility bar but will rely on each unit’s internal Web or IT staff to implement the bar. If you have questions about implementation or exceptions, email Web Communications at [web_feedback@ncsu.edu](mailto:web_feedback@ncsu.edu).
 
 ### To Use:
-Simply activate the plugin - the official NCSU utility bar should show up without any additional customization needed.
+Simply activate the plugin - the official NC State utility bar should show up without any additional customization needed.
 
 ### Customizable Options:
 There are a few customizable options available under Settings -> NC State Utility Bar from the WordPress admin dashboard.
@@ -20,7 +20,7 @@ There are a few customizable options available under Settings -> NC State Utilit
 
 * Bar Color: Alternate color options for the bar's color. Gray is the most commonly used.
 
-* Use NC State Brick?: Choose whether to use the NCSU red brick, as seen on the [central NCSU](https://ncsu.edu) page, or a simple link for the home button. 
+* Use NC State Brick?: Choose whether to use the NC State red brick, as seen on the [central NC State website](https://ncsu.edu), or a simple link for the home button. 
 
 ### WordPress Multisite Compatibility
 This plugin is compatible with WordPress multisite installs. Network activation will enable the utility bar on all network sites with default values, with customization available on a per-site basis. No additional configuration options will appear in the Network Admin dashboard.
