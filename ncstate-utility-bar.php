@@ -26,6 +26,7 @@ function ncsu_utility_bar_scripts(){
 
 	wp_enqueue_script('ncstate-utility-bar',
 	'https://cdn.ncsu.edu/brand-assets/utility-bar/ub.php?'.http_build_query($query_string),false,false,true);
+	wp_enqueue_style( 'univers-font', 'https://cdn.ncsu.edu/brand-assets/fonts/include.css' );
 }
 
 add_action('admin_menu','ncsu_utility_bar_menu');
@@ -41,10 +42,10 @@ function ncsu_ub_options_page(){
 	<div class="wrap">
 		<h2>NC State Brand Utility Bar</h2>
 		<form method="post" action="options.php">
-			
+
 			<?php settings_fields('ncsu_ub_options');?>
 			<?php do_settings_sections('ncsu_ub_settings'); ?>
-			
+
 			<?php submit_button(); ?>
 		</form>
 	</div>
@@ -90,14 +91,14 @@ function ncsu_ub_display_google_code(){
 }
 function ncsu_ub_display_placeholder(){
 	$options = get_option('ncsu_ub_options');
-		
+
 	echo "<input type='text' name='ncsu_ub_options[ub_search_placeholder]' value='". preg_replace('/(\+)/', ' ', $options['ub_search_placeholder']) ."' />";?>
 	<p><em>Customization of the placeholder text in the search bar.</em></p>
 	<?php
 }
 function ncsu_ub_display_width(){
 	$options = get_option('ncsu_ub_options');
-	
+
 	echo "<input type='text' name='ncsu_ub_options[ub_max_width]' value='{$options['ub_max_width']}' />";?>
 	<p><em>The utility bar is responsive. The width value should be set to your site's maximum breakpoint to enable a
 		fluid container width. If no width is set, the bar will align its contents to the default
@@ -122,7 +123,7 @@ function ncsu_ub_display_brick(){
 	$options = get_option('ncsu_ub_options');
 	$isChecked = $options['ub_tf_brick']==1?"checked='checked'":"";
 	echo "<input type='checkbox' value='1' id='ncsu_utility_bar_brick' name='ncsu_ub_options[ub_tf_brick]' {$isChecked} />";?>
-	<p><em>Choose whether to use the official 2x2 NC State brick logo in place of the default black and white 'NC State Home' button. 
+	<p><em>Choose whether to use the official 2x2 NC State brick logo in place of the default black and white 'NC State Home' button.
 		This option may be used in lieu of prominently displaying the NC State logo in the upper portion of the site. Keep in mind the
 		brick will hang and additional 30px further than the bottom of the utility bar and should be reasonably accommodated by your site's design.
 	</em></p>
