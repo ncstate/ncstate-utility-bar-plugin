@@ -5,6 +5,8 @@
 * Description: Inserts the NC State Brand Utility Bar at the top of every page
 * Version: 0.1
 * Author: NC State University Communications
+* 
+* GitHub Plugin URI: https://github.com/ncstate/ncstate-utility-bar-plugin
 */
 
 defined( 'ABSPATH' ) or die();
