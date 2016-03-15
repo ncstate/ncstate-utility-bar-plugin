@@ -163,4 +163,3 @@ function ncsu_ub_options_validate($input) {
 
 	return $newinput;
 }
-?>
