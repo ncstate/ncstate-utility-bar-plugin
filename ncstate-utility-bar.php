@@ -109,26 +109,28 @@ function ncsu_ub_display_width(){
 	<?php
 }
 function ncsu_ub_display_color(){
-	$options = get_option('ncsu_ub_options');
+    $options = get_option('ncsu_ub_options'); ?>
 
-	echo "<select id='ncsu_utility_bar_color' name='ncsu_ub_options[ub_bar_color]'>"; ?>
-		<option value="gray" <?php echo ($options['ub_bar_color']=="gray")?"selected":""; ?>>Gray</option>
-		<option value="red" <?php echo ($options['ub_bar_color']=="red")?"selected":""; ?>>Red</option>
-		<option value="black" <?php echo ($options['ub_bar_color']=="black")?"selected":""; ?>>Black</option>
-	</select>
-	<p><em>The color of the utility bar - Gray, Black, or Red</em></p>
-<?php
+    <select id='ncsu_utility_bar_color' name='ncsu_ub_options[ub_bar_color]'>";
+        <option value="gray" <?php selected($options['ub_bar_color'], 'gray'); ?>>Gray</option>
+        <option value="red" <?php selected($options['ub_bar_color'], 'red'); ?>>Red</option>
+        <option value="black" <?php selected($options['ub_bar_color'], 'black'); ?>>Black</option>
+    </select>
+    <p><em>The color of the utility bar - Gray, Black, or Red</em></p>
+
+    <?php
 }
 
 function ncsu_ub_display_brick(){
-	$options = get_option('ncsu_ub_options');
-	$isChecked = $options['ub_tf_brick']==1?"checked='checked'":"";
-	echo "<input type='checkbox' value='1' id='ncsu_utility_bar_brick' name='ncsu_ub_options[ub_tf_brick]' {$isChecked} />";?>
-	<p><em>Choose whether to use the official 2x2 NC State brick logo in place of the default black and white 'NC State Home' button. 
-		This option may be used in lieu of prominently displaying the NC State logo in the upper portion of the site. Keep in mind the
-		brick will hang and additional 30px further than the bottom of the utility bar and should be reasonably accommodated by your site's design.
-	</em></p>
-	<?php
+    $options = get_option('ncsu_ub_options'); ?>
+
+    <input type='checkbox' value='1' id='ncsu_utility_bar_brick' name='ncsu_ub_options[ub_tf_brick]'
+        <?php checked($options['ub_tf_brick'], 1); ?> />
+    <p><em>Choose whether to use the official 2x2 NC State brick logo in place of the default black and white 'NC State Home' button.
+            This option may be used in lieu of prominently displaying the NC State logo in the upper portion of the site. Keep in mind the
+            brick will hang and additional 30px further than the bottom of the utility bar and should be reasonably accommodated by your site's design.
+        </em></p>
+    <?php
 }
 
 
